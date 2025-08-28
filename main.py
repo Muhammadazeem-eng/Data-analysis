@@ -503,57 +503,6 @@ def get_top_delay_formulas():
     })
 
 # API endpoint for average scrap factor per line
-@app.get("/line-scrap-factor")
-def get_line_scrap_factor():
-    # Group by line and compute mean scrap factor
-    line_scrap = df.groupby("LINE_NO")["SCRAP_FACTOR"].mean().reset_index()
-
-    return JSONResponse(content={
-        "lines": line_scrap["LINE_NO"].astype(str).tolist(),
-        "avg_scrap_factor": line_scrap["SCRAP_FACTOR"].round(4).tolist(),
-        "ai_insights": """
-        ### What this shows
-- The bar chart illustrates the **average scrap factor for each production line**.  
-- **Scrap factor** = proportion of material wasted in production.  
-- Each bar = one production line’s average waste level.  
-
----
-
-### 🔑 Key Observations
-1. **Most lines are clustered at ~3% scrap factor**  
-   - Indicates relatively consistent performance across the majority of lines.  
-   - Suggests a systemic process baseline rather than isolated inefficiencies.  
-
-2. **Line 1 is the clear outlier (best performer, ~1.8%)**  
-   - Substantially below the factory-wide average.  
-   - Indicates higher efficiency — possibly newer machinery, tighter process control, or better-skilled operators.  
-
-3. **Other relatively efficient lines (~2.4–2.8%) include Lines 2, 13, 20, and 23**  
-   - These perform slightly better than the ~3% cluster.  
-
-4. **No line is underperforming dramatically**  
-   - No significant deviations above 3%.  
-   - Confirms scrap is more of a **systemic baseline issue** than a line-specific problem.  
-
----
-
-### 💡 Insights & Recommendations
-- **Benchmark Line 1 practices**  
-  - Study what makes Line 1 significantly more efficient.  
-  - Transfer best practices (operator training, equipment settings, maintenance schedules, etc.) to other lines.  
-
-- **Plant-wide improvement potential**  
-  - Even a **0.5% reduction in scrap across all lines** could yield substantial material savings.  
-
-- **Investigate systemic drivers of scrap**  
-  - Since most lines are at ~3%, improvements may come from:  
-    - Material specifications  
-    - Formula/recipe design  
-    - Standard operating procedures  
-    - Preventive maintenance  
-        """
-
-    })
 
 
 # API endpoint for monthly delay rate
@@ -701,45 +650,7 @@ def get_line_scrap_factor():
     })
 
 # API endpoint: Monthly Delay Rate (%)
-@app.get("/monthly-delay-rate")
-def get_monthly_delay_rate():
-    # --- Compute batch-level processing days ---
-    batch_processing = (
-        df.groupby("WIP_BATCH_ID")
-          .agg({"WIP_ACT_START_DATE": "min", "WIP_CMPLT_DATE": "max"})
-          .reset_index()
-    )
-    batch_processing["processing_days"] = (
-        (batch_processing["WIP_CMPLT_DATE"] - batch_processing["WIP_ACT_START_DATE"]).dt.days
-    )
-    batch_processing["month"] = batch_processing["WIP_ACT_START_DATE"].dt.to_period("M")
 
-    # --- Monthly totals and delayed counts ---
-    delay_by_month = (
-        batch_processing.assign(is_delayed=batch_processing["processing_days"] > 2)
-        .groupby("month")
-        .agg(
-            total_batches=("WIP_BATCH_ID", "count"),
-            delayed_batches=("is_delayed", "sum")
-        )
-        .reset_index()
-    )
-
-    delay_by_month["delay_rate"] = (
-        delay_by_month["delayed_batches"] / delay_by_month["total_batches"] * 100
-    )
-
-    # Convert Period -> string YYYY-MM
-    delay_by_month["month"] = delay_by_month["month"].astype(str)
-
-    # --- Return JSON ---
-    return JSONResponse(content={
-        "months": delay_by_month["month"].tolist(),
-        "delay_rates": delay_by_month["delay_rate"].round(2).tolist(),
-        "total_batches": delay_by_month["total_batches"].tolist(),
-        "delayed_batches": delay_by_month["delayed_batches"].tolist(),
-        "threshold": 50
-    })
 
 # 📌 Delay reasons by line
 @app.get("/delay-reasons-by-line")
