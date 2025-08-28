@@ -1,16 +1,22 @@
+
+from fastapi.responses import JSONResponse
+
+# main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-import numpy as np
+
 import pandas as pd
+import numpy as np
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(title="Manufacturing Analytics API", version="3.0")
 
-# Allow frontend (React, Vue, etc.) to fetch from API
+# -----------------------------
+# CORS
+# -----------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # you can restrict to your frontend domain later
+    allow_origins=["*"],   # tighten for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
