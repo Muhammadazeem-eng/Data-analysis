@@ -9,19 +9,22 @@ import pandas as pd
 import numpy as np
 import uvicorn
 
-app = FastAPI(title="Manufacturing Analytics API", version="3.0")
+app = FastAPI(
+    title="Manufacturing Analytics API",
+    version="3.0",
+    servers=[{"url": "/"}],   # <= use relative base
+)
 
-# -----------------------------
-# CORS
-# -----------------------------
+# If your function is served under /api (common on Vercel):
+# app = FastAPI(title="...", version="3.0", servers=[{"url": "/api"}])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # tighten for production
-    allow_credentials=True,
+    allow_origins=["*"],      # tighten in prod; set specific origins if using cookies
+    allow_credentials=False,  # "*" + credentials is invalid; set to False unless needed
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Load and preprocess data
 df = pd.read_excel("batch_details.xlsx")
 df["WIP_ACT_START_DATE"] = pd.to_datetime(df["WIP_ACT_START_DATE"])
