@@ -52,27 +52,27 @@ def get_histogram():
         "threshold": 2 ,
          "ai_insights":"""
          # What this chart shows
-- A **histogram** of batch-level processing times (`processing_days`).  
-- The **x-axis** shows how many days each batch took to complete.  
-- The **y-axis** shows the number of batches falling in each time range.  
-- The **red dashed line at 2 days** marks the **delay threshold**.  
+- A **histogram** of batch-level processing times (`processing_days`).
+- The **x-axis** shows how many days each batch took to complete.
+- The **y-axis** shows the number of batches falling in each time range.
+- The **red dashed line at 2 days** marks the **delay threshold**.
 
 # Insights you can derive
-1. **Most batches are fast**  
-   - The bulk of batches finish within **0–2 days**, clustering left of the threshold line.  
-   - This indicates the process is generally efficient for a majority of runs.  
+1. **Most batches are fast**
+   - The bulk of batches finish within **0–2 days**, clustering left of the threshold line.
+   - This indicates the process is generally efficient for a majority of runs.
 
-2. **Significant delayed tail**  
-   - There is a **long tail to the right**, with some batches taking much longer (5–10+ days, even beyond 20 days).  
-   - These extended outliers suggest **specific bottlenecks or exceptional cases** that require deeper investigation.  
+2. **Significant delayed tail**
+   - There is a **long tail to the right**, with some batches taking much longer (5–10+ days, even beyond 20 days).
+   - These extended outliers suggest **specific bottlenecks or exceptional cases** that require deeper investigation.
 
-3. **Delay threshold exceedances** 
-   - A notable number of batches cross the **2-day delay threshold**, visible as bars to the right of the red line.  
-   - These represent the **share of batches at risk** for customer service or operational performance metrics.  
+3. **Delay threshold exceedances**
+   - A notable number of batches cross the **2-day delay threshold**, visible as bars to the right of the red line.
+   - These represent the **share of batches at risk** for customer service or operational performance metrics.
 
-4. **Operational variability**  
-   - The spread of the distribution shows that while most processes are tightly controlled, there’s **variability across certain batches**.  
-   - Identifying root causes (equipment issues, material shortages, product type differences) can reduce this variability.  
+4. **Operational variability**
+   - The spread of the distribution shows that while most processes are tightly controlled, there’s **variability across certain batches**.
+   - Identifying root causes (equipment issues, material shortages, product type differences) can reduce this variability.
 
          """
     })
@@ -94,28 +94,28 @@ def get_delay_share():
         "threshold_days": threshold_days,
         "ai_insights": """
         # What this chart shows
-- A **bar chart** comparing the percentage of **on-time vs delayed batches**.  
-- About **74% of batches finish within the 2-day threshold** (on time).  
-- Around **26% of batches exceed the 2-day threshold** (delayed).  
+- A **bar chart** comparing the percentage of **on-time vs delayed batches**.
+- About **74% of batches finish within the 2-day threshold** (on time).
+- Around **26% of batches exceed the 2-day threshold** (delayed).
 
 # Insights you can derive
 1. **Overall performance**
-   - The majority of batches are completed on time, showing that the process is generally reliable.  
-   - However, with **1 in 4 batches delayed**, delays are not rare and could impact production flow and delivery schedules.  
+   - The majority of batches are completed on time, showing that the process is generally reliable.
+   - However, with **1 in 4 batches delayed**, delays are not rare and could impact production flow and delivery schedules.
 
 2. **Room for improvement**
-   - Reducing the delayed portion even by a few percentage points could yield major improvements in throughput, capacity utilization, and customer satisfaction.  
+   - Reducing the delayed portion even by a few percentage points could yield major improvements in throughput, capacity utilization, and customer satisfaction.
 
 3. **Business impact**
-   - If delayed batches involve high-value products or critical customer orders, the **real-world impact is larger than the percentage suggests**.  
-   - Understanding which formulas or lines contribute most to delays will help prioritize improvement efforts.  
+   - If delayed batches involve high-value products or critical customer orders, the **real-world impact is larger than the percentage suggests**.
+   - Understanding which formulas or lines contribute most to delays will help prioritize improvement efforts.
 
 # Suggested next steps
-- **Break down delay rates by line, formula, or product family** to identify where the 26% delays originate.  
-- **Quantify financial impact** by linking delayed batches to WIP value and lost opportunity.  
-- **Investigate recurring causes** (material shortages, equipment downtime, planning issues) for delayed batches.  
-- **Set improvement targets**, e.g., reduce delays from 26% → 15% over the next quarter.  
-        
+- **Break down delay rates by line, formula, or product family** to identify where the 26% delays originate.
+- **Quantify financial impact** by linking delayed batches to WIP value and lost opportunity.
+- **Investigate recurring causes** (material shortages, equipment downtime, planning issues) for delayed batches.
+- **Set improvement targets**, e.g., reduce delays from 26% → 15% over the next quarter.
+
         """
     })
 # API endpoint for monthly average processing days
@@ -139,34 +139,34 @@ def get_monthly_average_delay():
         "avg_processing_days": monthly_delay["processing_days"].tolist(), # y-axis values
         "threshold": 2 , # delay threshold
         "ai_insights": """
-        
+
         # What this chart shows
-- A **time-series line chart** of the **average batch processing days per month**.  
-- A **red dashed line marks the 2-day threshold** (delay benchmark).  
-- Early months mostly stayed **below or near the threshold**.  
+- A **time-series line chart** of the **average batch processing days per month**.
+- A **red dashed line marks the 2-day threshold** (delay benchmark).
+- Early months mostly stayed **below or near the threshold**.
 - In later months, the **average processing time increases sharply**, with several months exceeding **5–10 days on average**.
 
 # Insights you can derive
 1. **Early stability, later deterioration**
-   - Initially, batch processing was controlled and consistently **under 2 days** on average.  
-   - Over time, processing days **spiked significantly**, showing a **deterioration in performance**.  
+   - Initially, batch processing was controlled and consistently **under 2 days** on average.
+   - Over time, processing days **spiked significantly**, showing a **deterioration in performance**.
 
 2. **Clear upward trend**
-   - From the mid-point of the timeline, averages began creeping upward, suggesting **systematic delays** (e.g., demand surge, capacity bottlenecks, resource shortages).  
-   - The peaks reaching **10–15+ days** highlight **severe operational inefficiencies** in certain months.  
+   - From the mid-point of the timeline, averages began creeping upward, suggesting **systematic delays** (e.g., demand surge, capacity bottlenecks, resource shortages).
+   - The peaks reaching **10–15+ days** highlight **severe operational inefficiencies** in certain months.
 
 3. **Threshold breaches are frequent in later periods**
-   - In the first half, breaches of the 2-day delay threshold were rare.  
-   - In the second half, **delays became the norm rather than the exception**.  
+   - In the first half, breaches of the 2-day delay threshold were rare.
+   - In the second half, **delays became the norm rather than the exception**.
 
 # Suggested next steps
-- **Root cause analysis by time period**: Identify what changed during the months when delays started trending upward (e.g., seasonal demand, machine breakdowns, supplier issues).  
-- **Correlate with production volumes**: Check whether spikes coincide with high WIP loads or new product launches.  
-- **Operational interventions**:  
-  - Add capacity or shifts during peak months.  
-  - Rebalance workloads across lines.  
-  - Improve preventive maintenance to avoid bottlenecks.  
-- **Set monitoring alerts**: Flag when average monthly processing days exceed **2–3 days**, so corrective actions can be taken early. 
+- **Root cause analysis by time period**: Identify what changed during the months when delays started trending upward (e.g., seasonal demand, machine breakdowns, supplier issues).
+- **Correlate with production volumes**: Check whether spikes coincide with high WIP loads or new product launches.
+- **Operational interventions**:
+  - Add capacity or shifts during peak months.
+  - Rebalance workloads across lines.
+  - Improve preventive maintenance to avoid bottlenecks.
+- **Set monitoring alerts**: Flag when average monthly processing days exceed **2–3 days**, so corrective actions can be taken early.
         """
     })
 
@@ -186,37 +186,37 @@ def get_line_average_delay():
         "threshold": 2,
         "ai_insights": """
         # What this chart shows
-- A **bar chart of average processing days by production line**.  
-- A **red dashed line at 2 days** marks the threshold for delays.  
-- Most lines hover around **~2 days or below**, staying close to or under the benchmark.  
+- A **bar chart of average processing days by production line**.
+- A **red dashed line at 2 days** marks the threshold for delays.
+- Most lines hover around **~2 days or below**, staying close to or under the benchmark.
 - However, a few lines (notably **Line 24 and Line 25**) have **very high averages (4–5+ days)**, standing out as clear bottlenecks.
 
 # Insights you can derive
 1. **Overall performance is stable for most lines**
-   - Lines 1–22 are **well within control**, averaging near or below the 2-day threshold.  
-   - These lines show **balanced efficiency** with minimal variation.  
+   - Lines 1–22 are **well within control**, averaging near or below the 2-day threshold.
+   - These lines show **balanced efficiency** with minimal variation.
 
 2. **Critical bottlenecks**
-   - **Line 24 and Line 25** are major outliers with averages **double or more** the acceptable limit.  
-   - These lines are the **biggest contributors to system-wide delays**.  
+   - **Line 24 and Line 25** are major outliers with averages **double or more** the acceptable limit.
+   - These lines are the **biggest contributors to system-wide delays**.
 
 3. **Best performing lines**
-   - Lines 21–23 average **well below 2 days**, even under 1 day in some cases.  
-   - These can serve as **benchmarks for best practices** that may be replicated elsewhere.  
+   - Lines 21–23 average **well below 2 days**, even under 1 day in some cases.
+   - These can serve as **benchmarks for best practices** that may be replicated elsewhere.
 
 # Suggested next steps
-- **Deep-dive into Line 24 & 25**:  
-  - Check for capacity constraints, equipment issues, or staffing shortages.  
-  - Investigate if product mix or complexity on these lines is higher.  
+- **Deep-dive into Line 24 & 25**:
+  - Check for capacity constraints, equipment issues, or staffing shortages.
+  - Investigate if product mix or complexity on these lines is higher.
 
-- **Benchmark against top performers (Lines 21–23)**:  
-  - Analyze what operational strategies, scheduling, or resourcing helps them stay efficient.  
+- **Benchmark against top performers (Lines 21–23)**:
+  - Analyze what operational strategies, scheduling, or resourcing helps them stay efficient.
 
-- **Balance workloads**:  
-  - If possible, redistribute high-load batches from Lines 24–25 to underutilized lines.  
+- **Balance workloads**:
+  - If possible, redistribute high-load batches from Lines 24–25 to underutilized lines.
 
-- **Continuous monitoring**:  
-  - Regularly track average processing days per line to quickly detect new bottlenecks.  
+- **Continuous monitoring**:
+  - Regularly track average processing days per line to quickly detect new bottlenecks.
         """
     })
 
@@ -254,50 +254,50 @@ def get_line_monthly_average_delay():
         "lines": {str(col): pivoted[col].tolist() for col in pivoted.columns},
         "threshold": 2,
         "ai_insights": """
-        
+
         # What this chart shows
-- A **monthly trend of average processing days per line** across all 26 lines.  
-- The **red dashed line at 2 days** is the delay threshold.  
-- Each colored line represents one production line, with fluctuations in average processing days over time.  
+- A **monthly trend of average processing days per line** across all 26 lines.
+- The **red dashed line at 2 days** is the delay threshold.
+- Each colored line represents one production line, with fluctuations in average processing days over time.
 
 # Key observations
 1. **Overall variability across months**
-   - Most lines operate **close to or below 2 days** in many months, but several spikes occur periodically.  
-   - Indicates **occasional bottlenecks** rather than consistent systemic delays.  
+   - Most lines operate **close to or below 2 days** in many months, but several spikes occur periodically.
+   - Indicates **occasional bottlenecks** rather than consistent systemic delays.
 
 2. **Severe outliers**
    - Some months show extreme peaks:
-     - One line (possibly **Line 24**) spiked above **30 days**.  
-     - Another spike around **20 days** occurred in a different line (likely Line 25 or 13).  
-   - These peaks dominate the delay pattern and should be investigated.  
+     - One line (possibly **Line 24**) spiked above **30 days**.
+     - Another spike around **20 days** occurred in a different line (likely Line 25 or 13).
+   - These peaks dominate the delay pattern and should be investigated.
 
 3. **Recent upward trend**
-   - Toward later months, several lines (e.g., **Line 1, Line 2, Line 13**) are **consistently above 2 days**.  
-   - Suggests a **gradual worsening trend** across multiple lines.  
+   - Toward later months, several lines (e.g., **Line 1, Line 2, Line 13**) are **consistently above 2 days**.
+   - Suggests a **gradual worsening trend** across multiple lines.
 
 4. **Stable performers**
-   - Some lines remain **flat and consistently under 2 days** across months (e.g., Lines 6, 7, 10, 15, 18).  
-   - These represent **best practices** and process stability.  
+   - Some lines remain **flat and consistently under 2 days** across months (e.g., Lines 6, 7, 10, 15, 18).
+   - These represent **best practices** and process stability.
 
 # Insights & recommendations
 - **Investigate spikes (Line 24 & 25):**
-  - Likely due to **major disruptions** (machine breakdowns, manpower shortage, or large complex batches).  
-  - Need root-cause analysis for those extreme delays.  
+  - Likely due to **major disruptions** (machine breakdowns, manpower shortage, or large complex batches).
+  - Need root-cause analysis for those extreme delays.
 
 - **Monitor emerging trends (Lines 1, 2, 13):**
-  - Gradual creep above threshold signals **capacity stress**.  
-  - Address before they become chronic bottlenecks.  
+  - Gradual creep above threshold signals **capacity stress**.
+  - Address before they become chronic bottlenecks.
 
 - **Learn from stable lines (6, 7, 15, 18):**
-  - Capture **process discipline, scheduling, or resource allocation strategies** keeping them below threshold.  
-  - Use as benchmarks.  
+  - Capture **process discipline, scheduling, or resource allocation strategies** keeping them below threshold.
+  - Use as benchmarks.
 
 - **Consider rolling average visualization:**
-  - A **3-month rolling average** would smooth out extreme spikes and reveal more stable trends.  
+  - A **3-month rolling average** would smooth out extreme spikes and reveal more stable trends.
 
 # Next step suggestion
-Would you like me to prepare a **heatmap (line vs. month with color = avg delay)**?  
-That would make spotting problematic months & lines much clearer than overlapping line plots.  
+Would you like me to prepare a **heatmap (line vs. month with color = avg delay)**?
+That would make spotting problematic months & lines much clearer than overlapping line plots.
         """
     })
 
@@ -331,38 +331,38 @@ def get_delayed_batches_by_line():
         "delayed_batches": delayed_by_line["delayed_batches"].tolist(),
         "ai_insights": """
         # What this chart shows
-- The **number of delayed batches** (processing time > 2 days) per process line.  
-- Each bar represents a line, ranked from most to least delayed batches.  
+- The **number of delayed batches** (processing time > 2 days) per process line.
+- Each bar represents a line, ranked from most to least delayed batches.
 
 # Key observations
-1. **Critical lines with highest delays**  
-   - Lines **1 to 10** consistently show **very high delays (around 1,500 delayed batches each)**.  
-   - These lines represent the **core bottlenecks** in the production system.  
+1. **Critical lines with highest delays**
+   - Lines **1 to 10** consistently show **very high delays (around 1,500 delayed batches each)**.
+   - These lines represent the **core bottlenecks** in the production system.
 
-2. **Moderate problem lines**  
-   - Lines **11 to 19** show **800–1,000 delayed batches each**.  
-   - These are secondary contributors to overall delays.  
+2. **Moderate problem lines**
+   - Lines **11 to 19** show **800–1,000 delayed batches each**.
+   - These are secondary contributors to overall delays.
 
-3. **Low-delay lines**  
-   - Lines **20 to 23** show **few hundred delayed batches or less**.  
-   - Line 23 and 24 are **almost negligible contributors**, indicating either low volume or highly efficient processes.  
-   - Line 25 has **zero delayed batches**, making it the best performer.  
+3. **Low-delay lines**
+   - Lines **20 to 23** show **few hundred delayed batches or less**.
+   - Line 23 and 24 are **almost negligible contributors**, indicating either low volume or highly efficient processes.
+   - Line 25 has **zero delayed batches**, making it the best performer.
 
 # Insights & recommendations
-- **Prioritize improvement efforts on Lines 1–10**  
-  - They are responsible for the majority of delays and will give the **biggest impact if optimized**.  
-  - Possible issues: capacity overload, frequent breakdowns, scheduling inefficiencies.  
+- **Prioritize improvement efforts on Lines 1–10**
+  - They are responsible for the majority of delays and will give the **biggest impact if optimized**.
+  - Possible issues: capacity overload, frequent breakdowns, scheduling inefficiencies.
 
-- **Focus secondary attention on Lines 11–19**  
-  - Moderate level of delays, worth monitoring and addressing after the top 10 lines are stabilized.  
+- **Focus secondary attention on Lines 11–19**
+  - Moderate level of delays, worth monitoring and addressing after the top 10 lines are stabilized.
 
-- **Study best practices from Lines 23–25**  
-  - Very low or zero delays → investigate **why they are so efficient** (lower workload, better resource management, or less complex products?).  
-  - Apply learnings to high-delay lines.  
+- **Study best practices from Lines 23–25**
+  - Very low or zero delays → investigate **why they are so efficient** (lower workload, better resource management, or less complex products?).
+  - Apply learnings to high-delay lines.
 
 # Conclusion
-- **80/20 rule applies**: The top 10 lines (1–10) are likely contributing to **over 70% of total delays**.  
-- Improvements in these critical lines can drastically reduce system-wide production delays.  
+- **80/20 rule applies**: The top 10 lines (1–10) are likely contributing to **over 70% of total delays**.
+- Improvements in these critical lines can drastically reduce system-wide production delays.
 - A deeper drilldown (batch size, product type, resource availability per line) would help in root cause analysis.
         """
     })
@@ -407,36 +407,36 @@ def get_delayed_vs_total_batches():
 - Lines are sorted by workload (highest total batches on the left).
 
 # Key observations
-1. **High-workload lines (1–10)**  
-   - Each handles ~5,800 batches, the **largest share of total production**.  
-   - Despite high volumes, a **large chunk (blue) is delayed**.  
-   - Indicates **capacity strain** or **systematic inefficiencies**.  
+1. **High-workload lines (1–10)**
+   - Each handles ~5,800 batches, the **largest share of total production**.
+   - Despite high volumes, a **large chunk (blue) is delayed**.
+   - Indicates **capacity strain** or **systematic inefficiencies**.
 
-2. **Medium-workload lines (11–19)**  
-   - Handle ~2,500–3,500 batches each.  
-   - Proportion of delayed batches remains **significant (~25–30%)**, but absolute delays are fewer compared to top 10 lines.  
+2. **Medium-workload lines (11–19)**
+   - Handle ~2,500–3,500 batches each.
+   - Proportion of delayed batches remains **significant (~25–30%)**, but absolute delays are fewer compared to top 10 lines.
 
-3. **Low-workload lines (20–25)**  
-   - Much smaller total volumes.  
-   - Some still show delays (e.g., line 20), while others (23–25) are mostly delay-free.  
-   - Suggests that **delays are not purely volume-driven** — process or resource issues may exist.  
+3. **Low-workload lines (20–25)**
+   - Much smaller total volumes.
+   - Some still show delays (e.g., line 20), while others (23–25) are mostly delay-free.
+   - Suggests that **delays are not purely volume-driven** — process or resource issues may exist.
 
 # Insights & recommendations
-- **Critical pressure points: Lines 1–10**  
-  - They process the majority of batches and carry the **heaviest absolute delays**.  
-  - Improving efficiency here will have the **greatest system-wide impact**.  
+- **Critical pressure points: Lines 1–10**
+  - They process the majority of batches and carry the **heaviest absolute delays**.
+  - Improving efficiency here will have the **greatest system-wide impact**.
 
-- **Balanced focus on throughput and quality**  
-  - While some delays may be expected in high-volume lines, the **delayed fraction is disproportionately high**, suggesting structural bottlenecks (machine downtime, labor capacity, scheduling).  
+- **Balanced focus on throughput and quality**
+  - While some delays may be expected in high-volume lines, the **delayed fraction is disproportionately high**, suggesting structural bottlenecks (machine downtime, labor capacity, scheduling).
 
-- **Learnings from low-delay, low-volume lines (23–25)**  
-  - These lines run with minimal delays.  
-  - Investigating their **processes, product types, or resource allocation** could yield transferable improvements for higher-load lines.  
+- **Learnings from low-delay, low-volume lines (23–25)**
+  - These lines run with minimal delays.
+  - Investigating their **processes, product types, or resource allocation** could yield transferable improvements for higher-load lines.
 
 # Conclusion
-- The system follows a **Pareto distribution**: the top 10 lines account for most production and most delays.  
-- Optimizing these lines would yield the largest benefit.  
-- However, since delays also exist in medium/low-volume lines, **root cause analysis should go beyond workload** and check operational practices, resource constraints, and product complexity.  
+- The system follows a **Pareto distribution**: the top 10 lines account for most production and most delays.
+- Optimizing these lines would yield the largest benefit.
+- However, since delays also exist in medium/low-volume lines, **root cause analysis should go beyond workload** and check operational practices, resource constraints, and product complexity.
 
         """
     })
@@ -474,39 +474,39 @@ def get_top_delay_formulas():
         "delay_rates": top_delay_formulas["delay_rate"].round(2).tolist(),
         "ai_insights": """
         # What this chart shows
-- The chart compares the **average scrap factor per production line**.  
-- Scrap factor indicates the proportion of material wasted (scrap) during production.  
+- The chart compares the **average scrap factor per production line**.
+- Scrap factor indicates the proportion of material wasted (scrap) during production.
 - Each bar corresponds to a **Line No**, with its respective average scrap factor.
 
 # Key observations
-1. **Most lines are clustered around ~0.03 (3%) scrap factor**  
-   - This indicates a relatively consistent performance across the majority of lines.  
+1. **Most lines are clustered around ~0.03 (3%) scrap factor**
+   - This indicates a relatively consistent performance across the majority of lines.
 
-2. **Line 1 shows the lowest scrap factor (~0.018 / 1.8%)**  
-   - This suggests Line 1 is operating more efficiently, with less material waste compared to others.  
-   - Could be due to better machine calibration, newer equipment, or skilled operators.  
+2. **Line 1 shows the lowest scrap factor (~0.018 / 1.8%)**
+   - This suggests Line 1 is operating more efficiently, with less material waste compared to others.
+   - Could be due to better machine calibration, newer equipment, or skilled operators.
 
-3. **Lines 2, 13, 21, and 23 show slightly lower scrap rates (~2.5–2.8%)** compared to the ~3% benchmark.  
-   - These may be secondary efficient performers.  
+3. **Lines 2, 13, 21, and 23 show slightly lower scrap rates (~2.5–2.8%)** compared to the ~3% benchmark.
+   - These may be secondary efficient performers.
 
-4. **No line shows excessively high scrap rates** (all are within a narrow range around 3%).  
-   - This suggests scrap is a systemic baseline issue rather than isolated to one problematic line.  
+4. **No line shows excessively high scrap rates** (all are within a narrow range around 3%).
+   - This suggests scrap is a systemic baseline issue rather than isolated to one problematic line.
 
 # Insights & recommendations
-- **Benchmark Line 1 practices**  
-  - Investigate why Line 1 has significantly lower scrap.  
-  - Replicate best practices (e.g., preventive maintenance, operator skill, material handling) across other lines.  
+- **Benchmark Line 1 practices**
+  - Investigate why Line 1 has significantly lower scrap.
+  - Replicate best practices (e.g., preventive maintenance, operator skill, material handling) across other lines.
 
-- **Focus on small improvements across all lines**  
-  - Since most lines are near 3%, a **0.5% reduction plant-wide** could yield significant savings in material costs.  
+- **Focus on small improvements across all lines**
+  - Since most lines are near 3%, a **0.5% reduction plant-wide** could yield significant savings in material costs.
 
-- **Check for systemic causes**  
-  - The uniformity of scrap factors indicates a **common process or formula-driven scrap rate**, rather than line-specific defects.  
-  - This means looking into **recipe design, raw material variability, or production setup standards** might be more impactful.  
+- **Check for systemic causes**
+  - The uniformity of scrap factors indicates a **common process or formula-driven scrap rate**, rather than line-specific defects.
+  - This means looking into **recipe design, raw material variability, or production setup standards** might be more impactful.
 
 # Conclusion
-- Scrap rates are generally stable but consistently around ~3%.  
-- Line 1 stands out as a model of efficiency (~40% lower scrap vs. average).  
+- Scrap rates are generally stable but consistently around ~3%.
+- Line 1 stands out as a model of efficiency (~40% lower scrap vs. average).
 - By studying Line 1’s practices and applying them plant-wide, overall scrap can be reduced significantly
         """
     })
@@ -553,48 +553,48 @@ def get_monthly_delay_rate():
         "delay_rates": delay_by_month["delay_rate"].round(2).tolist(),
         "threshold": 50,
         "ai_insights": """
-        
+
 # ⏱️ Monthly Delay Rate (%) – Analysis
 
 ### What the chart shows
-- This line chart tracks the **delay rate (%) by month**.  
-- The dashed gray line at 50% is a **reference threshold** for acceptable delay levels.  
-- Red markers highlight the actual monthly delay performance.  
+- This line chart tracks the **delay rate (%) by month**.
+- The dashed gray line at 50% is a **reference threshold** for acceptable delay levels.
+- Red markers highlight the actual monthly delay performance.
 
 ---
 
 ### 🔑 Key Observations
-1. **Extremely high volatility**  
-   - Delay rates fluctuate sharply month-to-month, often swinging from near zero to over **1000%+**.  
+1. **Extremely high volatility**
+   - Delay rates fluctuate sharply month-to-month, often swinging from near zero to over **1000%+**.
    - Indicates unstable processes or external disruptions.
 
-2. **Early period (left side)**  
-   - Several **spikes above 1200% delay rate**, followed by a gradual decline.  
-   - Suggests initial instability before some corrective measures.  
+2. **Early period (left side)**
+   - Several **spikes above 1200% delay rate**, followed by a gradual decline.
+   - Suggests initial instability before some corrective measures.
 
-3. **Mid-period (center of the chart)**  
-   - Delay rates are relatively **low and stable**, often hovering near or below the 50% threshold.  
-   - This was the **best performing phase**.  
+3. **Mid-period (center of the chart)**
+   - Delay rates are relatively **low and stable**, often hovering near or below the 50% threshold.
+   - This was the **best performing phase**.
 
-4. **Recent period (right side)**  
-   - Sustained **high delays (800%–1500%)** with sharp month-to-month swings.  
-   - Suggests recurrence of systemic problems, possibly capacity constraints, supply chain issues, or workforce inefficiencies.  
+4. **Recent period (right side)**
+   - Sustained **high delays (800%–1500%)** with sharp month-to-month swings.
+   - Suggests recurrence of systemic problems, possibly capacity constraints, supply chain issues, or workforce inefficiencies.
 
 ---
 
 ### 💡 Insights & Recommendations
-- **Investigate root causes of spikes**  
-  - Look into months with extreme delays (>1000%). These may align with **material shortages, machine breakdowns, or peak demand surges**.  
+- **Investigate root causes of spikes**
+  - Look into months with extreme delays (>1000%). These may align with **material shortages, machine breakdowns, or peak demand surges**.
 
-- **Replicate mid-period stability**  
-  - The stable months (near/below 50%) should be studied as benchmarks — what processes worked then that are missing now?  
+- **Replicate mid-period stability**
+  - The stable months (near/below 50%) should be studied as benchmarks — what processes worked then that are missing now?
 
-- **Recent performance is concerning**  
-  - Sustained high delays suggest **systemic inefficiencies have returned**.  
-  - Requires urgent corrective action to avoid recurring customer dissatisfaction and financial losses.  
+- **Recent performance is concerning**
+  - Sustained high delays suggest **systemic inefficiencies have returned**.
+  - Requires urgent corrective action to avoid recurring customer dissatisfaction and financial losses.
 
-- **Forecasting & resource planning**  
-  - Volatility suggests delays may not be random. Using **seasonality analysis** could help anticipate spikes and plan resources accordingly.  
+- **Forecasting & resource planning**
+  - Volatility suggests delays may not be random. Using **seasonality analysis** could help anticipate spikes and plan resources accordingly.
 
         """
     })
@@ -613,46 +613,46 @@ def get_line_scrap_factor():
     # 🚨 Delay Reasons by Line – Analysis
 
 ### What the chart shows
-- This stacked bar chart shows **delayed batch counts per line**, broken down by different **delay reasons**.  
-- The legend categorizes causes:  
-  - **Major:** Addition/deletion for Batch WIP, Capacity Constraints, RM Short, ERP/WIP Errors.  
-  - **Minor but recurring:** CR.LOW, HOLD BY SC, Holidays, Supply Chain instructions, Viscosity Variation.  
+- This stacked bar chart shows **delayed batch counts per line**, broken down by different **delay reasons**.
+- The legend categorizes causes:
+  - **Major:** Addition/deletion for Batch WIP, Capacity Constraints, RM Short, ERP/WIP Errors.
+  - **Minor but recurring:** CR.LOW, HOLD BY SC, Holidays, Supply Chain instructions, Viscosity Variation.
 
 ---
 
 ### 🔑 Key Observations
-1. **Line 1 is the biggest bottleneck**  
-   - Extremely high delays (~850+ counts), far above all other lines.  
-   - Mostly driven by **“Addition and deletion for Batch WIP”**.  
+1. **Line 1 is the biggest bottleneck**
+   - Extremely high delays (~850+ counts), far above all other lines.
+   - Mostly driven by **“Addition and deletion for Batch WIP”**.
 
-2. **Lines 2–11 have consistent but moderate delays**  
-   - Each shows **~250–300 delayed batches**, again dominated by Batch WIP changes.  
-   - Secondary reasons (capacity constraints, RM short, ERP/WIP error) are present but comparatively minor.  
+2. **Lines 2–11 have consistent but moderate delays**
+   - Each shows **~250–300 delayed batches**, again dominated by Batch WIP changes.
+   - Secondary reasons (capacity constraints, RM short, ERP/WIP error) are present but comparatively minor.
 
-3. **Lines 12–14 are nearly clean**  
-   - Very few delays logged, suggesting either **lower load or more efficient processes**.  
+3. **Lines 12–14 are nearly clean**
+   - Very few delays logged, suggesting either **lower load or more efficient processes**.
 
-4. **Root cause dominance**  
-   - Across all lines, **Batch WIP adjustments** are the overwhelming root cause.  
-   - Other categories (capacity, raw material shortage, ERP/WIP error) remain small contributors.  
+4. **Root cause dominance**
+   - Across all lines, **Batch WIP adjustments** are the overwhelming root cause.
+   - Other categories (capacity, raw material shortage, ERP/WIP error) remain small contributors.
 
 ---
 
 ### 💡 Insights & Recommendations
-- **Immediate focus: Line 1**  
-  - Investigate **Batch WIP process design** – why does Line 1 face disproportionate rework?  
-  - Possible causes: scheduling conflicts, incorrect batch planning, operator interventions.  
+- **Immediate focus: Line 1**
+  - Investigate **Batch WIP process design** – why does Line 1 face disproportionate rework?
+  - Possible causes: scheduling conflicts, incorrect batch planning, operator interventions.
 
-- **Standardize WIP handling across lines**  
-  - Since Batch WIP is the dominant reason everywhere, a **cross-line process correction** could reduce delays significantly.  
+- **Standardize WIP handling across lines**
+  - Since Batch WIP is the dominant reason everywhere, a **cross-line process correction** could reduce delays significantly.
 
-- **Preventive measures for secondary causes**  
-  - Build stronger **capacity buffers** (machine/operator availability).  
-  - Strengthen **raw material planning** to reduce RM shortages.  
-  - Audit **ERP/WIP data accuracy** to minimize system-driven delays.  
+- **Preventive measures for secondary causes**
+  - Build stronger **capacity buffers** (machine/operator availability).
+  - Strengthen **raw material planning** to reduce RM shortages.
+  - Audit **ERP/WIP data accuracy** to minimize system-driven delays.
 
-- **Learn from Lines 12–14**  
-  - Study practices here (lower volumes? better planning? different operators?) and replicate to Lines 1–11.  
+- **Learn from Lines 12–14**
+  - Study practices here (lower volumes? better planning? different operators?) and replicate to Lines 1–11.
 
     """
 
@@ -721,5 +721,88 @@ def get_top_delay_reasons():
     }
 
 
+from datetime import timedelta
+df["WIP_ACT_START_DATE"] = pd.to_datetime(df["WIP_ACT_START_DATE"], errors="coerce")
+df["WIP_CMPLT_DATE"]     = pd.to_datetime(df["WIP_CMPLT_DATE"], errors="coerce")
+
+# Per-batch table
+batches = (
+    df.groupby("WIP_BATCH_ID")
+      .agg(start=("WIP_ACT_START_DATE","min"),
+           end=("WIP_CMPLT_DATE","max"))
+      .reset_index()
+)
+
+# Processing time (days) per batch
+batches["processing_days"] = (batches["end"] - batches["start"]).dt.total_seconds() / 86400
+
+# Helper: latest month bounds (based on latest date present, start or end)
+latest_date = pd.to_datetime(
+    max(batches["end"].max(), batches["start"].max())
+).normalize()
+CUR_START = latest_date.replace(day=1)
+CUR_END   = (CUR_START + pd.offsets.MonthBegin(1)) - timedelta(days=1)
+
+# Monthly average processing (for 3-month rolling)
+batches["end_month"] = batches["end"].dt.to_period("M")
+avg_by_month = (
+    batches.dropna(subset=["end_month"])
+           .groupby("end_month")["processing_days"]
+           .mean()
+           .sort_index()
+)
+
+def rolling_3mo_for(month_period):
+    # last three months including the given month
+    if month_period is None or avg_by_month.empty:
+        return 0.0
+    idx = avg_by_month.index.sort_values()
+    if month_period not in idx:
+        return float(avg_by_month.tail(3).mean()) if len(avg_by_month) else 0.0
+    pos = list(idx).index(month_period)
+    lo = max(0, pos - 2)
+    return float(avg_by_month.iloc[lo:pos+1].mean())
+
+@app.get("/overview")
+def overview():
+    # current period month as Period('YYYY-MM')
+    cur_month = (CUR_START.to_period("M"))
+
+    # 1) Total Batches (started in current month)
+    total_batches = int(
+        batches[(batches["start"] >= CUR_START) & (batches["start"] <= CUR_END)].shape[0]
+    )
+
+    # 2) Delayed Rate (completed in current month, processing_days > 2)
+    completed_cur = batches[
+        (batches["end"].notna()) & (batches["end"] >= CUR_START) & (batches["end"] <= CUR_END)
+    ].copy()
+    delayed_rate = round(
+        (completed_cur["processing_days"] > 2).mean() * 100, 2
+    ) if not completed_cur.empty else 0.0
+
+    # 3) Avg Processing Days (current month) + rolling 3-month avg
+    avg_proc_days = round(float(completed_cur["processing_days"].mean()), 2) if not completed_cur.empty else 0.0
+    rolling_avg_3mo = round(rolling_3mo_for(cur_month), 2)
+
+    # 4) Avg Scrap Factor (plant-wide mean)
+    avg_scrap_factor = round(float(df["SCRAP_FACTOR"].mean() * 100), 2)
+
+    return JSONResponse(content={
+        "period": {
+            "label": str(cur_month),                 # e.g., "2025-06"
+            "start": str(CUR_START.date()),
+            "end": str(CUR_END.date())
+        },
+        "stats": {
+            "total_batches": total_batches,                          # across all lines
+            "delayed_rate_percent": delayed_rate,                    # share of delayed (proc > 2d)
+            "avg_processing_days": avg_proc_days,                    # current month
+            "avg_processing_days_3mo": rolling_avg_3mo,              # rolling average
+            "avg_scrap_factor_percent": avg_scrap_factor             # plant-wide mean
+        }
+    })
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
+
